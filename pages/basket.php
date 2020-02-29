@@ -1,6 +1,16 @@
 
 <?php require_once '../configs/config.php' ?>
 
+<?php
+	if (!(isset($_SESSION['logged']))) {
+		header('location: ./login.php');
+		exit();
+	} elseif (!($_SESSION['logged'])) {
+		header('location: ./login.php');
+		exit();
+	}
+?>
+
 <html>
 <head>
 	<title>basket</title>

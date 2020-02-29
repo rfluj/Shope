@@ -43,6 +43,7 @@
 				while ($row = $query->fetch_assoc()) {
 					$id          = $row['id'];
 					$name        = $row['name'];
+					$price       = $row['price'];
 					$about       = $row['about'];
 					$number      = $row['number'];
 					$change_name = change_name($name);
@@ -51,6 +52,7 @@
 					<br>
 					<img id=","image_kala"," src=","../srcs/images/kalaha/$change_name.jpg"," alt=$name>
 					<br>
+					<span>price(rial): $price</span>
 					<p>$about</p>
 					<br>";
 					if ($number >= 10) {
