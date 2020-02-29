@@ -1,0 +1,105 @@
+body {
+	background-image: url("../srcs/images/b.jpg");
+	padding: 0px;
+	margin: 0px;
+	font-family: tahoma;
+}
+
+.main h1 {
+	text-align: center;
+	color: white;
+}
+
+.float {
+	float: right;
+	margin: 20px;
+}
+
+.float a {
+	text-decoration: none;
+}
+
+.float h2 {
+	background-color: #0E6655;
+	height: 30px;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.clear {
+	clear: both;
+}
+
+.main ul {
+	background-color: #BDC3C7;
+	height: 20px;
+	border:1px solid #0E6655;
+	padding: 10px;
+	border-radius: 10px;
+	margin: 0px;
+}
+
+.main ul li a {
+	text-decoration: none;
+	color: #0E6655;
+}
+
+.main ul li {
+	display: inline;
+	margin-right: 20px;
+	background-color: #B2BABB;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+
+.change_img img {
+	height: 300px;
+	width: 500px;
+}
+
+
+.show {
+	height: 250px;
+}
+
+.show h4 {
+	margin: 20px;
+	color: #212F3C;
+}
+
+.show a {
+	text-decoration: none;
+}
+
+.show div a img {
+	width: 300px;
+	height: 200px;
+}
+
+
+#slider {
+	width: 512px;
+	margin: 20px auto 0 auto;
+}
+#slider img {
+	width: 512px;
+	height: 384px;
+	border-radius: 10px;
+}
+#slider .buttons ul li {
+	float: left;
+	margin-right: 20px;
+	list-style: none;
+	width: 10px;
+	height: 10px;
+	border-radius: 100%;
+	background: #ffffff;
+	position: relative;
+	bottom: 43px;
+	left: -20px;
+}
+#slider .buttons ul li.active {
+	box-shadow: 0px 0px 0px 2px #3d4222;
+}
+
