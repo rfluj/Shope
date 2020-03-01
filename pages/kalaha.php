@@ -44,7 +44,6 @@
 					$id          = $row['id'];
 					$name        = $row['name'];
 					$price       = $row['price'];
-					echo "sd";
 					$about       = $row['about'];
 					$number      = $row['number'];
 					$change_name = change_name($name);
