@@ -21,6 +21,13 @@
 		<h1>sabate kharid Shoma</h1>
 		<?php
 			$username = $_POST['user'];
+			while ($i < count($_SESSION['basket'])) {
+				if (in_array($i, $_SESSION['basket'], true)) {
+					echo "tekrari '$i'   ";
+				} else {
+					echo $i;
+				}
+			}
 
 		?>
 
