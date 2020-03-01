@@ -18,9 +18,10 @@
 </head>
 <body>
 	<div class="main">
-		<h1>sabate kharid</h1>
+		<h1>sabate kharid Shoma</h1>
 		<?php
-			
+			$username = $_POST['user'];
+
 		?>
 
 		<a href="./say_hello.php">safhe asli</a>
