@@ -21,7 +21,7 @@
 						</form>";
 					if (isset($_POST['kharid'])) {
 						$id = array($_POST['id']);
-						array_push($_SESSION['basket'], $id);
+						array_push($_SESSION['basket'], $_POST['id']);
 						echo "<span>kala be sabad kharid ezafe shod.</span>";
 					}
 				} elseif (isset($_POST['kharid'])) {

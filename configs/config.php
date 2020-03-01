@@ -39,3 +39,29 @@
 		}
 		return $string;
 	}
+
+	function arr_tekrar ($array) {
+		$in_array = array();
+		$arr      = array();
+		$i        = 0;
+		while ($i < count($array)) {
+			$num = $array[$i];
+			if (in_array($num, $in_array, true)) {
+				$j = 0;
+				while ($j < count($arr)) {
+					if ($arr[$j][0] == $num) {
+						$x = $arr[$j][1];
+						$x += 1;
+						$arr[$j][1] = $x;
+						break;
+					}
+					$j += 1;
+				}
+			} else {
+				array_push($arr, array($num, 1));
+				array_push($in_array, $num);
+			}
+			$i += 1;
+		}
+		return $arr;
+	}

@@ -20,13 +20,30 @@
 	<div class="main">
 		<h1>sabate kharid Shoma</h1>
 		<?php
-			$username = $_POST['user'];
-			while ($i < count($_SESSION['basket'])) {
-				if (in_array($i, $_SESSION['basket'], true)) {
-					echo "tekrari '$i'   ";
-				} else {
-					echo $i;
-				}
+			$username = $_SESSION['user'];
+			// $i        = 0;
+			$in_array = arr_tekrar($_SESSION['basket']);
+			// $id_array = array();
+			// while ($i < count($_SESSION['basket'])) {
+			// 	$num = $_SESSION['basket'][$i];
+			// 	if (in_array($num, $id_array, TRUE)) {
+			// 		echo "tekrari";
+			// 		echo $num;
+			// 		$x = $in_array[$i][1];
+			// 		$x += 1;
+			// 		$in_array[$i][1] = $x;
+			// 	} else {
+			// 		array_push($id_array, $num);
+			// 		array_push($in_array, array($num, 1));
+			// 		echo $num;
+			// 	}
+			// 	$i += 1;
+			// }
+			$j = 0;
+			while ($j < count($in_array)) {
+				echo "\n";
+				echo "id kala -> ", $in_array[$j][0], " ; tedad -> ", $in_array[$j][1];
+				$j += 1;
 			}
 
 		?>
