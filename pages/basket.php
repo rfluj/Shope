@@ -11,6 +11,31 @@
 	}
 ?>
 
+<?php
+	if (isset($_POST['delete'])) {
+		$id = $_POST['id'];
+		while (in_array($id, $_SESSION['basket'], true)) {
+			unset($id);
+		}
+	} elseif (isset($_POST['delete_1'])) {
+		$id       = $_POST['id'];
+		$number   = index_of_element($_SESSION['basket'], $id);
+		if ($number !== -1) {
+			unset($_SESSION['basket'][$number]);
+		}
+		// $in_array = arr_tekrar($_SESSION['basket']);
+		// $j = 0;
+		// while ($j < count($in_array)) {
+		// 	if ($id == $in_array[$j][0]) {
+		// 		$x = $in_array[$j][1];
+		// 		$x -= 1;
+		// 		$in_array[$j][1] = $x;
+		// 	}
+		// 	$j += 1;
+		// }
+	}
+?>
+
 <html>
 <head>
 	<title>basket</title>
@@ -21,28 +46,49 @@
 		<h1>sabate kharid Shoma</h1>
 		<?php
 			$username = $_SESSION['user'];
-			// $i        = 0;
 			$in_array = arr_tekrar($_SESSION['basket']);
-			// $id_array = array();
-			// while ($i < count($_SESSION['basket'])) {
-			// 	$num = $_SESSION['basket'][$i];
-			// 	if (in_array($num, $id_array, TRUE)) {
-			// 		echo "tekrari";
-			// 		echo $num;
-			// 		$x = $in_array[$i][1];
-			// 		$x += 1;
-			// 		$in_array[$i][1] = $x;
-			// 	} else {
-			// 		array_push($id_array, $num);
-			// 		array_push($in_array, array($num, 1));
-			// 		echo $num;
-			// 	}
-			// 	$i += 1;
-			// }
 			$j = 0;
 			while ($j < count($in_array)) {
-				echo "\n";
-				echo "id kala -> ", $in_array[$j][0], " ; tedad -> ", $in_array[$j][1];
+				$id     = $in_array[$j][0];
+				$number = $in_array[$j][1];
+				$query  = mysqli_query($db, "SELECT * FROM kala WHERE id='$id'");
+				$str_1  = "hazf az sabat kharid";
+				$str_2  = "1 adad kam shavad";
+				if ($query) {
+					$row         = $query->fetch_assoc();
+					$name        = $row['name'];
+					$price       = $row['price'];
+					$about       = $row['about'];
+					$change_name = change_name($name);
+					echo "<h3>$name</h3>
+					<br>
+					<img id=","image_kala"," src=","../srcs/images/kalaha/$change_name.jpg"," alt=$name>
+					<br>
+					<span>price(rial): $price</span>
+					<p>$about</p>
+					<br>
+					<span>tedad : $number</span>
+					<br>";
+					if ($number > 1) {
+						echo "<form action=","basket.php"," method=","post",">
+						<input type=","hidden"," name=","id"," value=$id>
+						<input id=","delete_kala"," type=","submit"," name=","delete_1"," value='$str_2'>
+						<br>
+						<input id=","delete_kala"," type=","submit"," name=","delete"," value='$str_1'>
+					</form>
+					<hr>";
+					} else {
+						echo "<form action=","basket.php"," method=","post",">
+						<input type=","hidden"," name=","id"," value=$id>
+						<input id=","delete_kala"," type=","submit"," name=","delete"," value='$str_1'>
+					</form>
+					<hr>";
+					}
+				}
+					
+					
+				// echo "\n";
+				// echo "id kala -> ", $in_array[$j][0], " ; tedad -> ", $in_array[$j][1];
 				$j += 1;
 			}
 

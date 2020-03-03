@@ -65,3 +65,14 @@
 		}
 		return $arr;
 	}
+
+	function index_of_element ($array, $var) {
+		$i = 0;
+		while ($i < count($array)) {
+			if ($var === $array[$i]) {
+				return $i;
+			}
+			$i += 1;
+		}
+		return -1;
+	}
