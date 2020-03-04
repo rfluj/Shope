@@ -14,14 +14,22 @@
 <?php
 	if (isset($_POST['delete'])) {
 		$id = $_POST['id'];
-		while (in_array($id, $_SESSION['basket'], true)) {
-			unset($id);
+		// echo $id;
+		while (in_array($_POST['id'], $_SESSION['basket'], true)) {
+			// echo "string";
+			$number   = index_of_element($_SESSION['basket'], $id);
+			$_SESSION['basket'] = array_values($_SESSION['basket']);
+			if ($number > -1) {
+				unset($_SESSION['basket'][$number]);
+				$_SESSION['basket'] = array_values($_SESSION['basket']);
+			}
 		}
 	} elseif (isset($_POST['delete_1'])) {
 		$id       = $_POST['id'];
 		$number   = index_of_element($_SESSION['basket'], $id);
-		if ($number !== -1) {
+		if ($number > -1) {
 			unset($_SESSION['basket'][$number]);
+			$_SESSION['basket'] = array_values($_SESSION['basket']);
 		}
 		// $in_array = arr_tekrar($_SESSION['basket']);
 		// $j = 0;
@@ -45,9 +53,10 @@
 	<div class="main">
 		<h1>sabate kharid Shoma</h1>
 		<?php
-			$username = $_SESSION['user'];
-			$in_array = arr_tekrar($_SESSION['basket']);
-			$j = 0;
+			$username  = $_SESSION['user'];
+			$in_array  = arr_tekrar($_SESSION['basket']);
+			$j         = 0;
+			$price_all = 0;
 			while ($j < count($in_array)) {
 				$id     = $in_array[$j][0];
 				$number = $in_array[$j][1];
@@ -60,6 +69,8 @@
 					$price       = $row['price'];
 					$about       = $row['about'];
 					$change_name = change_name($name);
+					$g           = $price * $number;
+					$price_all += $g; 
 					echo "<h3>$name</h3>
 					<br>
 					<img id=","image_kala"," src=","../srcs/images/kalaha/$change_name.jpg"," alt=$name>
@@ -68,6 +79,8 @@
 					<p>$about</p>
 					<br>
 					<span>tedad : $number</span>
+					<br>
+					<span>geimat kole in kala : $g</span>
 					<br>";
 					if ($number > 1) {
 						echo "<form action=","basket.php"," method=","post",">
@@ -85,12 +98,10 @@
 					<hr>";
 					}
 				}
-					
-					
-				// echo "\n";
-				// echo "id kala -> ", $in_array[$j][0], " ; tedad -> ", $in_array[$j][1];
 				$j += 1;
 			}
+			echo "<span>price all : $price_all</span>
+			<br>";
 
 		?>
 
