@@ -38,6 +38,7 @@ body {
 	text-decoration: none;
 	text-decoration-color: #DA0DC4;
 	color: #DA0DC4;
+	margin: 0px 5px 0px 5px;
 }
 
 .main #delete_kala {
@@ -45,3 +46,6 @@ body {
 	height: 30px;
 }
 
+.main a[id="this_page"] {
+	color: #000;
+}

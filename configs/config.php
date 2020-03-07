@@ -76,3 +76,7 @@
 		}
 		return -1;
 	}
+	
+	function intdiv($a, $b){
+		return ($a - $a % $b) / $b;
+	}
