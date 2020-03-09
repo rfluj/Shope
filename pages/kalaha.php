@@ -73,6 +73,8 @@
 					<br>
 					<span>price(rial): $price</span>
 					<p>$about</p>
+					<br>
+					<a href=","./show_kala.php?id_kala=$id",">didian kala</a>
 					<br>";
 					if ($number >= 10) {
 						echo "<span>Status : mojod</span>
