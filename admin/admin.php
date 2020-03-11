@@ -56,6 +56,8 @@
 				<br>
 				<a href=","./kalaha.php",">kalaha</a>
 				<br>
+				<a href=","./command.php",">commands</a>
+				<br>
 				<form action=","./admin.php"," method=","post",">
 				<input type=","submit"," name=","exit"," value=","exit",">
 				</form>";

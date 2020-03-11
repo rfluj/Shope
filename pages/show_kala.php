@@ -1,6 +1,51 @@
 
 <?php require_once '../configs/config.php' ?>
 
+<?php
+	if (isset($_SESSION['logged'])) {
+		if ($_SESSION['logged']) {
+			$str = 'moshahese sabad kharid.';
+			echo "<form action=","./basket.php"," method=","post",">
+					<input id=","submit"," type=","submit"," name=","basket"," value='$str'>
+				</form>";
+			if (isset($_POST['kharid'])) {
+				array_push($_SESSION['basket'], $_POST['id_kala']);
+				echo "<span>kala be sabad kharid ezafe shod.</span>";
+			}
+		} elseif (isset($_POST['kharid'])) {
+			echo "<p>shamo vared site nashodeied lotfan varede hesab karbari khod shavid.</p>
+			<br>
+			<a href=","./login.php",">safhe login</a>";
+		}
+	} elseif (isset($_POST['kharid'])) {
+		echo "<p>shamo vared site nashodeied lotfan varede hesab karbari khod shavid.</p>
+		<br>
+		<a href=","./login.php",">safhe login</a>";
+	}
+?>
+
+<?php
+	if (isset($_SESSION['logged'])) {
+		if ($_SESSION['logged']) {
+			if (isset($_POST['send_command'])) {
+				$text            = $_POST['text'];
+				$KID             = $_POST['id'];
+				$_GET['id_kala'] = $KID;
+				if (empty($text) or empty($KID)) {
+					echo "ersal command na movafag.";
+				} else {
+					$username = $_SESSION['user'];
+					$q        = mysqli_query($db, "SELECT id FROM users WHERE username='$username'");
+					$row      = $q->fetch_assoc();
+					$UID      = $row['id'];
+					mysqli_query($db, "INSERT INTO command (UID, KID, command_text) VALUES ('$UID', '$KID', '$text')");
+				}
+			}
+		}
+	}
+?>
+
+
 <html>
 <head>
 	<title>show kala</title>
@@ -31,14 +76,14 @@
 					if ($number >= 10) {
 						echo "<span>Status : mojod</span>
 						<br>
-						<form action=","./kalaha.php"," method=","post",">
+						<form action=","./show_kalaha.php"," method=","post",">
 							<input type=","hidden"," name=","id"," value=$id_kala>
 							<input id=","submit"," type=","submit"," name=","kharid"," value='$submit_str'>
 						</form>";
 					} elseif ($number != 0) {
 						echo "<span>Status : '$number' ta mojod</span>
 						<br>
-						<form action=","./kalaha.php"," method=","post",">
+						<form action=","./show_kalaha.php"," method=","post",">
 							<input type=","hidden"," name=","id"," value=$id_kala>
 							<input id=","submit"," type=","submit"," name=","kharid"," value='$submit_str'>
 						</form>";
@@ -49,19 +94,30 @@
 				}
 				echo "<span>nazarat</span>
 				<br>";
-				$query   = mysqli_query($db, "SELECT * FROM cammand WHERE KID='$id_kala' ORDER BY id DESC");
+				$query   = mysqli_query($db, "SELECT * FROM command WHERE KID='$id_kala' ORDER BY id DESC");
 				if ($query) {
 					while ($row = $query->fetch_assoc()) {
-						$id   = $row['id'];
-						$UID  = $row['UID'];
-						$text = $row['text'];
-						echo $id;
+						$id        = $row['id'];
+						$UID       = $row['UID'];
+						$text      = $row['command_text'];
+						$block     = $row['block'];
+						if ($block == 'unBlock') {
+							$query_UID = mysqli_query($db, "SELECT username FROM users WHERE id='$UID'");
+							if ($query_UID) {
+								$r = $query_UID->fetch_assoc();
+								$u = $r['username']; 
+								echo "<span>$u : $text</span>
+								<br>";
+
+							}
+						}
+						
 					}
 				}
 				echo "<span>ersal nazar</span>
 				<br>";
-				if (isset($_SESSION['user'])) {
-					if ($_SESSION['user']) {
+				if (isset($_SESSION['logged'])) {
+					if ($_SESSION['logged']) {
 						$username       = $_SESSION['user'];
 						$query_username = mysqli_query($db, "SELECT id FROM users WHERE username='$username'");
 						if ($query_username) {
@@ -72,7 +128,7 @@
 						echo "<form action=","./show_kala.php"," method=","post",">
 			<span>ferestadan nazar</span>
 			<br>
-			<input type=","hidden"," name=","id"," value=$UID>
+			<input type=","hidden"," name=","id"," value=$id_kala>
 			<input type=","text"," name=","text"," placeholder=","enter your text",">
 			<br>
 			<input type=","submit"," name=","send_command"," value=","send",">
