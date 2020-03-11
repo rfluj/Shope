@@ -1,7 +1,12 @@
 
 <?php require_once "../configs/config.php" ?>
 
-
+<?php
+	if (!isset($_SESSION['admin']) or (!$_SESSION['admin'])) {
+		header('location: ./admin.php');
+		exit();
+	}
+?>
 
 <html>
 <head>
