@@ -11,7 +11,7 @@
 	if (!(isset($_SESSION['basket']))) {
 		$_SESSION['basket'] = array();
 	}
-
+	echo "string";
 	$key  = "shamsali";
 	$salt = "shamsali";
 
@@ -23,6 +23,19 @@
 	function decrypt($string, $key) {
 		$string = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, base64_decode($string), MCRYPT_MODE_ECB));
 		return $string;
+	}
+
+	function get_file_type ($filedir, $filename)
+	{
+		if (file_exists($filedir . $filename . '.jpg')) {
+			return '.jpg';
+		} elseif (file_exists($filedir . $filename . '.png')) {
+			return '.png';
+		} elseif (file_exists($filedir . $filename . '.jpeg')) {
+			return '.jpeg';
+		} elseif (file_exists($filedir . $filename . '.gif')) {
+			return '.gif';
+		} return false;
 	}
 
 	function change_name($name) {
